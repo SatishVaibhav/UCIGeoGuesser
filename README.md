@@ -1,1 +1,1 @@
-# UCIGeoGuesser
+# UCI GeoGuesser
