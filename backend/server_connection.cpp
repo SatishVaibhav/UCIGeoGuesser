@@ -1,15 +1,11 @@
-// #include <httplib.h>
-#include <iostream>
-
-using namespace std;
+#include "crow.h"
 
 int main() {
-    // Server svr;
-    // svr.Get("/data", [](const Request& req, Response& res){
-    //     res.set_content("{\"message\": \"Hello from C++\"}", "application/json");
-    // });
-    // svr.listen("0.0.0.0", 8080);
+    crow::SimpleApp app;
 
-    cout << "Hi" << endl;
-    return 0;
+    CROW_ROUTE(app, "/") ([](){
+        return "UCI Geoguesser!";
+    });
+
+    app.port(18080).multithreaded().run();
 }
