@@ -10,5 +10,6 @@ int main() {
     // });
     // svr.listen("0.0.0.0", 8080);
 
-    cout << "Hi";
-}       
+    cout << "Hi" << endl;
+    return 0;
+}
