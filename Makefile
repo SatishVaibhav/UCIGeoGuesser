@@ -1,10 +1,14 @@
-CXXFLAGS= -std=c++17 -Wall -Wextra -Werror -Wfatal-errors -pedantic
+CXXFLAGS := -std=c++17 -Wall -Wextra -Werror -Wfatal-errors -pedantic
+INCLUDES := -Icrow -I/opt/homebrew/opt/asio/include
+
+bin:
+	mkdir bin
 
 main: backend/main.cpp
 	g++ $(CXXFLAGS) backend/main.cpp -o bin/main
 
 server_connection: backend/server_connection.cpp
-	g++ $(CXXFLAGS) -Icrow -I/opt/homebrew/opt/asio/include backend/server_connection.cpp -o bin/server_connection
+	g++ $(CXXFLAGS) $(INCLUDES) backend/server_connection.cpp -o bin/server_connection
 
-# You guys will need to download asio urself or you guys can git clone asio and include the include folder in the project.
-# That way everyone can use it
+clean:
+	rm -f bin/*

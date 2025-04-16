@@ -1,11 +1,13 @@
-#include "crow.h"
-
+// #include "crow.h"
+#include <iostream>
 int main() {
-    crow::SimpleApp app;
+    // crow::SimpleApp app;
 
-    CROW_ROUTE(app, "/") ([](){
-        return "UCI Geoguesser!";
-    });
+    // CROW_ROUTE(app, "/") ([](){
+    //     return "UCI Geoguesser!";
+    // });
 
-    app.port(18080).multithreaded().run();
+    // app.port(18080).multithreaded().run();
+    std::cout << "hi";
+    return 0;
 }
