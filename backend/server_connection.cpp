@@ -3,7 +3,9 @@ int main() {
     crow::SimpleApp app;
 
     CROW_ROUTE(app, "/") ([](){
-        return "UCI Geoguesser!";
+        crow::mustache::set_base("frontend");
+        auto page = crow::mustache::load_text("main.html");
+        return page;
     });
 
     app.port(18080).multithreaded().run();
