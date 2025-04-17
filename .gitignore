@@ -1,2 +1,4 @@
 .vscode
 bin
+next/
+node_modules/
