@@ -2,7 +2,6 @@
 
 // import Image from "next/image";
 import React, { useState, useEffect } from 'react';
-// import tailwindcss from '@tailwindcss/postcss';
 
 const App = () => {
   const [msg, setMsg] = useState<string>('Testing..');
@@ -21,13 +20,20 @@ const App = () => {
       .catch(err => setMsg('Error; server didn\'t connect: ' + err));
   }, []);
 
-  return(
-      <div> 
-        <h1 className=''>Server Info</h1>
-        <p>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-cyan-100 to-teal-300">
+      <div className="bg-white px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md">
+        <h1 className="mb-4 text-black font-extrabold text-4xl">
+          UCI GeoGuessr
+          </h1>
+        <div className="text-xl text-slate-800 font-semibold py-6 border-y border-slate-200 mb-4">
           {msg}
+        </div>
+        <p className="mt-4 text-xs text-slate-400">
+          Refresh for a new location!
         </p>
       </div>
+    </div>
   );
 }
 
