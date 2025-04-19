@@ -19,8 +19,19 @@ int main() {
         
         crow::json::wvalue res;
         
-        for(auto& i : images){
-            res["images"][i.first] = i.second;
+        int id = 1;
+
+        for (const auto& file : filesystem::directory_iterator("./res")) {
+            ifstream in(file.path(), ios::binary);
+            stringstream ss;
+            ss << in.rdbuf();
+
+            string ext = file.path().extension().string();
+            string mime = (ext == ".jpg" || ext == ".jpeg") ? "image/jpeg" : "image/png";
+
+            res["images"][to_string(id++)] =
+                "data:" + mime + ";base64," +
+                crow::utility::base64encode(ss.str(), ss.str().size());
         }
         return res;
     });
