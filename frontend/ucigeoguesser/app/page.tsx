@@ -2,11 +2,37 @@
 
 import React, { useState, useEffect } from 'react';
 import { openDB } from 'idb';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+import calculateScore from './score';
+
+// Set a default icon for markers
+const defaultIcon = L.icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+L.Marker.prototype.options.icon = defaultIcon;
 
 const App = () => {
+  /*Use state*/
   const [loading, setLoading] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string>('');
   const [locationData, setLocationData] = useState<string[]>([]);
+  const [guessCoords, setGuessCoords] = useState<[number, number] | null>(null);
+
+  /*Map settings*/
+  const mapZoom = 14.5;
+  const southWest = L.latLng(33.63996645704226, -117.8553771977022);
+  const northEast = L.latLng(33.65229191655349, -117.82417774244097);
+  const mapBounds = L.latLngBounds(southWest, northEast);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('indexedDB' in window)) return;
@@ -51,6 +77,15 @@ const App = () => {
     loadData();
   }, []);
 
+  const MapClickHandler = () => {
+    useMapEvents({
+      click(e) {
+        setGuessCoords([e.latlng.lat, e.latlng.lng]);
+      },
+    });
+    return null;
+  };
+
   return (
     <div
       className="min-h-screen w-full relative transition-opacity duration-500"
@@ -58,28 +93,41 @@ const App = () => {
         backgroundImage: `url(${imageSrc})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundColor: '#0f172a', // fallback for no image
+        backgroundColor: '#0f172a',
       }}
     >
-      {/* Loading Overlay */}
       {loading && (
         <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
           <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
-      {/* Main Content */}
       {!loading && (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="bg-white bg-opacity-90 px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md">
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          <div className="bg-white bg-opacity-90 px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md mb-6">
             <h1 className="mb-4 text-black font-extrabold text-4xl">UCI GeoGuesser</h1>
             <h2 className="mb-4 text-slate font-semibold text-3xl">
               Latitude: {locationData[1]}, Longitude: {locationData[0]}
             </h2>
+            {guessCoords && (
+              <p className="text-sm text-slate-700">
+                Your Guess: Latitude {guessCoords[0]}, Longitude {guessCoords[1]} <br />
+                Score: {calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}
+              </p>
+            )}
             <p className="mt-4 text-xs text-slate-500 font-medium">
               Refresh to get a new location!
             </p>
           </div>
+            {/* Center at aldrich part */}
+          <MapContainer center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds} style={{ height: '400px', width: '100%', maxWidth: '800px' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="&copy; OpenStreetMap contributors"
+            />
+            <MapClickHandler />
+            {guessCoords && <Marker position={guessCoords} />}
+          </MapContainer>
         </div>
       )}
     </div>
