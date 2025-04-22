@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250320_141834.jpg",
+  "description": "",
+  "imageViews": "8",
+  "creationTime": {
+    "timestamp": "1745216398",
+    "formatted": "Apr 21, 2025, 6:19:58 AM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1742505516",
+    "formatted": "Mar 20, 2025, 9:18:36 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.642998,
+    "longitude": -117.84364500000001,
+    "altitude": 26.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.642998,
+    "longitude": -117.84364500000001,
+    "altitude": 26.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipNj39e7-LiBYMTnZ9ZyxCfgJ-qvxGpxmmgBzZw",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

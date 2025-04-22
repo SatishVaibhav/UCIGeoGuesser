@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241029_174026.jpg",
+  "description": "",
+  "imageViews": "19",
+  "creationTime": {
+    "timestamp": "1730248880",
+    "formatted": "Oct 30, 2024, 12:41:20 AM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1730248829",
+    "formatted": "Oct 30, 2024, 12:40:29 AM UTC"
+  },
+  "geoData": {
+    "latitude": 33.643330999999996,
+    "longitude": -117.84101299999999,
+    "altitude": 8.13,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.643330999999996,
+    "longitude": -117.84101299999999,
+    "altitude": 8.13,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipPzywQRj-qajpLYw26AFAXKZ4k3nH6-fwaOV2E",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

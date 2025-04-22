@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250311_185951.jpg",
+  "description": "",
+  "imageViews": "5",
+  "creationTime": {
+    "timestamp": "1745216398",
+    "formatted": "Apr 21, 2025, 6:19:58 AM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1741744797",
+    "formatted": "Mar 12, 2025, 1:59:57 AM UTC"
+  },
+  "geoData": {
+    "latitude": 33.651176,
+    "longitude": -117.845069,
+    "altitude": 0.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.651176,
+    "longitude": -117.845069,
+    "altitude": 0.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipOt1sf2g4ZrE2JN8P19gAxxoLup9oqG_fMwGZY",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241123_155618.jpg",
+  "description": "",
+  "imageViews": "15",
+  "creationTime": {
+    "timestamp": "1732634963",
+    "formatted": "Nov 26, 2024, 3:29:23 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1732406182",
+    "formatted": "Nov 23, 2024, 11:56:22 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.6438,
+    "longitude": -117.82699000000001,
+    "altitude": 8.9,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.6438,
+    "longitude": -117.82699000000001,
+    "altitude": 8.9,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipNNowCKmQt3Ms4Ntd_Uwqh5uDZsl25l-ZTpqt0",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

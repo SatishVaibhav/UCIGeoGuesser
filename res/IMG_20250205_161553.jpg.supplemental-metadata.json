@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250205_161553.jpg",
+  "description": "",
+  "imageViews": "4",
+  "creationTime": {
+    "timestamp": "1745216398",
+    "formatted": "Apr 21, 2025, 6:19:58 AM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1738800959",
+    "formatted": "Feb 6, 2025, 12:15:59 AM UTC"
+  },
+  "geoData": {
+    "latitude": 33.645936999999996,
+    "longitude": -117.84705599999998,
+    "altitude": -5.206,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.645936999999996,
+    "longitude": -117.84705599999998,
+    "altitude": -5.206,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipPrHl4-kmIFkQZg04dQIwcWO-z9Jjy1NCJKR5U",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

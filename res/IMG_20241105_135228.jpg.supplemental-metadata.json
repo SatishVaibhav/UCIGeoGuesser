@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241105_135228.jpg",
+  "description": "",
+  "imageViews": "9",
+  "creationTime": {
+    "timestamp": "1730912136",
+    "formatted": "Nov 6, 2024, 4:55:36 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1730843557",
+    "formatted": "Nov 5, 2024, 9:52:37 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.644607,
+    "longitude": -117.84379499999999,
+    "altitude": -0.1,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.644607,
+    "longitude": -117.84379499999999,
+    "altitude": -0.1,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipM0w8ZgF84FgnfcpmadJrHYPe5Ol-k6072Tv3Y",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

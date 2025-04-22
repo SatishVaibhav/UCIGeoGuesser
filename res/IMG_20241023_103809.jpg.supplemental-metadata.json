@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241023_103809.jpg",
+  "description": "",
+  "imageViews": "50",
+  "creationTime": {
+    "timestamp": "1729705251",
+    "formatted": "Oct 23, 2024, 5:40:51 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1729705093",
+    "formatted": "Oct 23, 2024, 5:38:13 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.645193,
+    "longitude": -117.83933900000001,
+    "altitude": -0.776,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.645193,
+    "longitude": -117.83933900000001,
+    "altitude": -0.776,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipMcecpTvVgql-CGsovJ2TN1iov-3uvkLQb3SVs",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

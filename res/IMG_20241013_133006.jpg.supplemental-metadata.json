@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241013_133006.jpg",
+  "description": "",
+  "imageViews": "71",
+  "creationTime": {
+    "timestamp": "1729532853",
+    "formatted": "Oct 21, 2024, 5:47:33 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1728851411",
+    "formatted": "Oct 13, 2024, 8:30:11 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.645277,
+    "longitude": -117.838725,
+    "altitude": 12.141,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.645277,
+    "longitude": -117.838725,
+    "altitude": 12.141,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipPVLmwpFDF-5YrrIMDK-idnDBGn32NQtAPehrc",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

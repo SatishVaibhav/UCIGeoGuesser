@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20241108_152620.jpg",
+  "description": "",
+  "imageViews": "10",
+  "creationTime": {
+    "timestamp": "1731810666",
+    "formatted": "Nov 17, 2024, 2:31:06 AM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1731108386",
+    "formatted": "Nov 8, 2024, 11:26:26 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.648903,
+    "longitude": -117.84034400000002,
+    "altitude": 0.447,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.648903,
+    "longitude": -117.84034400000002,
+    "altitude": 0.447,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipNvdjJne50WIE6FEO91I4erYzeyq7D0TufGKbk",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}
