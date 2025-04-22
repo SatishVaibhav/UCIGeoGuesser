@@ -1,31 +1,54 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { openDB } from 'idb';
 
 const App = () => {
-
   const [loading, setLoading] = useState<boolean>(true);
-
   const [imageSrc, setImageSrc] = useState<string>('');
   const [locationData, setLocationData] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:18080/home')
-      .then(res => res.json())
-      .then(data => {
-        const images = data.images;
-        const imageKey = Object.keys(images);
-        const randomKey = imageKey[Math.floor(Math.random() * imageKey.length)];
-        setImageSrc(images[randomKey]['image']);
-        setLocationData([images[randomKey]['metadata']['geoData']['longitude'], images[randomKey]['metadata']['geoData']['latitude']])
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setImageSrc('');
-        setLocationData([]);
-        setLoading(true);
+    if (typeof window === 'undefined' || !('indexedDB' in window)) return;
+  
+    const loadData = async () => {
+      const db = await openDB('ImageDB', 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains('homeData')) {
+            db.createObjectStore('homeData');
+          }
+        },
       });
+  
+      let allImages = await db.get('homeData', 'allImages');
+  
+      if (!allImages) {
+        try {
+          const res = await fetch('http://localhost:18080/home');
+          const data = await res.json();
+          allImages = data.images;
+          await db.put('homeData', allImages, 'allImages');
+        } catch (err) {
+          console.error(err);
+          setImageSrc('');
+          setLocationData([]);
+          setLoading(true);
+          return;
+        }
+      }
+  
+      const imageKeys = Object.keys(allImages);
+      const randomKey = imageKeys[Math.floor(Math.random() * imageKeys.length)];
+      const selected = allImages[randomKey];
+      setImageSrc(selected.image);
+      setLocationData([
+        selected.metadata.geoData.longitude,
+        selected.metadata.geoData.latitude,
+      ]);
+      setLoading(false);
+    };
+  
+    loadData();
   }, []);
 
   return (
@@ -45,7 +68,7 @@ const App = () => {
         {loading ? <p>Loading Coordinates...</p> : (
           locationData && (
           <h2 className="mb-4 text-slate font-semibold text-3xl">
-            Latitude: { locationData[0]}, Longitude: { locationData[1] }
+            Latitude: { locationData[1]}, Longitude: { locationData[0] }
           </h2>
           )
           )
