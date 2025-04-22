@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('indexedDB' in window)) return;
-  
+
     const loadData = async () => {
       const db = await openDB('ImageDB', 1, {
         upgrade(db) {
@@ -19,9 +19,9 @@ const App = () => {
           }
         },
       });
-  
+
       let allImages = await db.get('homeData', 'allImages');
-  
+
       if (!allImages) {
         try {
           const res = await fetch('http://localhost:18080/home');
@@ -36,7 +36,7 @@ const App = () => {
           return;
         }
       }
-  
+
       const imageKeys = Object.keys(allImages);
       const randomKey = imageKeys[Math.floor(Math.random() * imageKeys.length)];
       const selected = allImages[randomKey];
@@ -47,36 +47,41 @@ const App = () => {
       ]);
       setLoading(false);
     };
-  
+
     loadData();
   }, []);
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-screen w-full relative transition-opacity duration-500"
       style={{
         backgroundImage: `url(${imageSrc})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay'
+        backgroundColor: '#0f172a', // fallback for no image
       }}
     >
-      <div className="bg-white bg-opacity-90 px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md">
-        <h1 className="mb-4 text-black font-extrabold text-4xl">
-          UCI GeoGuessr
-        </h1>
-        {loading ? <p>Loading Coordinates...</p> : (
-          locationData && (
-          <h2 className="mb-4 text-slate font-semibold text-3xl">
-            Latitude: { locationData[1]}, Longitude: { locationData[0] }
-          </h2>
-          )
-          )
-          }
-        <p className="mt-4 text-xs text-slate-500 font-medium">
-          Refresh to get a new location!
-        </p>
-      </div>
+      {/* Loading Overlay */}
+      {loading && (
+        <div className="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center z-10">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin" />
+        </div>
+      )}
+
+      {/* Main Content */}
+      {!loading && (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="bg-white bg-opacity-90 px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md">
+            <h1 className="mb-4 text-black font-extrabold text-4xl">UCI GeoGuesser</h1>
+            <h2 className="mb-4 text-slate font-semibold text-3xl">
+              Latitude: {locationData[1]}, Longitude: {locationData[0]}
+            </h2>
+            <p className="mt-4 text-xs text-slate-500 font-medium">
+              Refresh to get a new location!
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
