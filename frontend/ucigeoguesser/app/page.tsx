@@ -8,6 +8,7 @@ import L from 'leaflet';
 
 import calculateScore from './score';
 import TitleScreen from './TitleScreen';
+import Results from './Results';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -81,6 +82,22 @@ const App = () => {
     loadData();
   }, []);
 
+  const loadNewImage = async () => {
+    setLoading(true);
+    setGuessCoords(null);
+    const db = await openDB('ImageDB', 1);
+    const allImages = await db.get('homeData', 'allImages');
+    const imageKeys = Object.keys(allImages);
+    const randomKey = imageKeys[Math.floor(Math.random() * imageKeys.length)];
+    const selected = allImages[randomKey];
+    setImageSrc(selected.image);
+    setLocationData([
+      selected.metadata.geoData.longitude,
+      selected.metadata.geoData.latitude,
+    ]);
+    setLoading(false);
+  }
+
   const MapClickHandler = () => {
     useMapEvents({
       click(e) {
@@ -112,15 +129,13 @@ const App = () => {
 
       {!loading && (
         <div className="min-h-screen flex flex-col items-center justify-center">
-          <div className="absolute top-2 left-2 bg-white bg-opacity-90 px-1 py-0 rounded-2xl shadow-xl text-center w-full max-w-xs">
-            <h1 className="mb-2 text-black font-extrabold text-4xl">UCI GeoGuesser</h1>
+          <div className="absolute top-2 left-2 bg-gray-500/30 bg-opacity-90 px-1 py-0 rounded-2xl shadow-xl text-center w-full max-w-xs">
+            <h1 className="mb-2 text-white font-extrabold text-4xl drop-shadow-[px_1px_0px_black]">UCI GeoGuesser</h1>
             <h2 className="mb-2 text-slate font-semibold text-3xl">
 
             </h2>
             {guessCoords && (
-              <p className="text-sm text-black-700 font-bold">
-                Score: {calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}
-              </p>
+              <Results onNextImage={loadNewImage} score={calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}></Results>
             )}
           </div>
 
@@ -130,14 +145,14 @@ const App = () => {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-          <MapContainer className="h-full w-full" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds}>
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&copy; OpenStreetMap contributors"
-            />
-            <MapClickHandler />
-            {guessCoords && <Marker position={guessCoords} />}
-          </MapContainer>
+            <MapContainer className="h-full w-full" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds}>
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; OpenStreetMap contributors"
+              />
+              <MapClickHandler />
+              {guessCoords && <Marker position={guessCoords} />}
+            </MapContainer>
           </div>
         </div>
       )}
