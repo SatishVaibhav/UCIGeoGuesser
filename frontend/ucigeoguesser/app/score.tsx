@@ -5,7 +5,11 @@ function calculateScore(userLatitude: number, userLongitude: number, correctLati
     const distance = Math.sqrt(latScore**2 + longScore**2);
 
     const maxScore = 5000; 
-    const score = Math.round(maxScore * (Math.E ** (-distance*300)));
+    let score = Math.round(maxScore * (Math.E ** (-distance*150)));
+
+    if(score >= 4930){
+        score = 5000;
+    }
 
     return score;
 }
