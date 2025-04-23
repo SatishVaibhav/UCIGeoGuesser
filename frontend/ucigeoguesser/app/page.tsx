@@ -23,12 +23,15 @@ const defaultIcon = L.icon({
 L.Marker.prototype.options.icon = defaultIcon;
 
 const App = () => {
+  
   /*Use state*/
   const [loading, setLoading] = useState<boolean>(true);
   const [imageSrc, setImageSrc] = useState<string>('');
   const [locationData, setLocationData] = useState<string[]>([]);
   const [guessCoords, setGuessCoords] = useState<[number, number] | null>(null);
-  const [showTitleScreen, setShowTitleScreen] = useState(true); // NEW
+  const [showTitleScreen, setShowTitleScreen] = useState<boolean>(true); // NEW
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+  
   /*Map settings*/
   const mapZoom = 14.5;
   const southWest = L.latLng(33.63996645704226, -117.8553771977022);
@@ -120,8 +123,14 @@ const App = () => {
               </p>
             )}
           </div>
+
             {/* Center at aldrich park */}
-          <MapContainer className="absolute bottom-2 right-2" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds} style={{ height: '325px', width: '100%', maxWidth: '325px' }}>
+            
+            <div className="absolute bottom-2 right-2 transition-all duration-300 ease-in-out" style={{ height: isHovering ? '500px' : '325px', width: isHovering ? '500px' : '325px' }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+          <MapContainer className="h-full w-full" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; OpenStreetMap contributors"
@@ -129,6 +138,7 @@ const App = () => {
             <MapClickHandler />
             {guessCoords && <Marker position={guessCoords} />}
           </MapContainer>
+          </div>
         </div>
       )}
     </div>
