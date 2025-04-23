@@ -115,14 +115,13 @@ const App = () => {
 
             </h2>
             {guessCoords && (
-              <p className="text-sm text-black-700 font-extrabold">
-                Your Guess: Latitude {guessCoords[0]}, Longitude {guessCoords[1]} <br />
+              <p className="text-sm text-black-700 font-bold">
                 Score: {calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}
               </p>
             )}
           </div>
-            {/* Center at aldrich part */}
-          <MapContainer center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds} style={{ height: '400px', width: '100%', maxWidth: '800px' }}>
+            {/* Center at aldrich park */}
+          <MapContainer className="absolute bottom-2 right-2" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds} style={{ height: '325px', width: '100%', maxWidth: '325px' }}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; OpenStreetMap contributors"
