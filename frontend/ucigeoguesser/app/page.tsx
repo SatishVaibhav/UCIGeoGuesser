@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 import calculateScore from './score';
+import TitleScreen from './TitleScreen';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -27,7 +28,7 @@ const App = () => {
   const [imageSrc, setImageSrc] = useState<string>('');
   const [locationData, setLocationData] = useState<string[]>([]);
   const [guessCoords, setGuessCoords] = useState<[number, number] | null>(null);
-
+  const [showTitleScreen, setShowTitleScreen] = useState(true); // NEW
   /*Map settings*/
   const mapZoom = 14.5;
   const southWest = L.latLng(33.63996645704226, -117.8553771977022);
@@ -86,6 +87,10 @@ const App = () => {
     return null;
   };
 
+  if (showTitleScreen) {
+    return <TitleScreen onStart={() => setShowTitleScreen(false)} />;
+  }
+
   return (
     <div
       className="min-h-screen w-full relative transition-opacity duration-500"
@@ -104,20 +109,17 @@ const App = () => {
 
       {!loading && (
         <div className="min-h-screen flex flex-col items-center justify-center">
-          <div className="bg-white bg-opacity-90 px-8 py-10 rounded-2xl shadow-xl text-center w-full max-w-md mb-6">
-            <h1 className="mb-4 text-black font-extrabold text-4xl">UCI GeoGuesser</h1>
-            <h2 className="mb-4 text-slate font-semibold text-3xl">
-              Latitude: {locationData[1]}, Longitude: {locationData[0]}
+          <div className="absolute top-2 left-2 bg-white bg-opacity-90 px-1 py-0 rounded-2xl shadow-xl text-center w-full max-w-xs">
+            <h1 className="mb-2 text-black font-extrabold text-4xl">UCI GeoGuesser</h1>
+            <h2 className="mb-2 text-slate font-semibold text-3xl">
+
             </h2>
             {guessCoords && (
-              <p className="text-sm text-slate-700">
+              <p className="text-sm text-black-700 font-extrabold">
                 Your Guess: Latitude {guessCoords[0]}, Longitude {guessCoords[1]} <br />
                 Score: {calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}
               </p>
             )}
-            <p className="mt-4 text-xs text-slate-500 font-medium">
-              Refresh to get a new location!
-            </p>
           </div>
             {/* Center at aldrich part */}
           <MapContainer center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds} style={{ height: '400px', width: '100%', maxWidth: '800px' }}>
