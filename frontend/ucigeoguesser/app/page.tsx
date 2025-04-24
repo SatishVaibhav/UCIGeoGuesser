@@ -10,6 +10,7 @@ import calculateScore from './score';
 import TitleScreen from './TitleScreen';
 import Results from './results';
 import Guess from './guess';
+import { hasSubscribers } from 'diagnostics_channel';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -33,6 +34,7 @@ const App = () => {
   const [guessCoords, setGuessCoords] = useState<[number, number] | null>(null);
   const [showTitleScreen, setShowTitleScreen] = useState<boolean>(true);
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  const [hasGuessed, setHasGuessed] = useState<boolean>(false);
   
   /*Map settings*/
   const mapZoom = 14.5;
@@ -99,10 +101,13 @@ const App = () => {
     setLoading(false);
   }
 
-  const MapClickHandler = () => {
+  const MapClickHandler = ({ hasGuessed }: 
+    {hasGuessed: boolean;}) => {
     useMapEvents({
       click(e) {
-        setGuessCoords([e.latlng.lat, e.latlng.lng]);
+        if (!hasGuessed) {
+          setGuessCoords([e.latlng.lat, e.latlng.lng]);
+        }
       },
     });
     return null;
@@ -135,8 +140,16 @@ const App = () => {
             <h2 className="mb-2 text-slate font-semibold text-3xl">
 
             </h2>
-            {guessCoords && (
-              <Results onNextImage={loadNewImage} score={calculateScore(guessCoords[0], guessCoords[1], Number(locationData[1]), Number(locationData[0]))}></Results>
+            {hasGuessed && guessCoords &&(
+              <Results onNextImage={() => {
+                loadNewImage();
+                setHasGuessed(false);
+              }} 
+                score={calculateScore(guessCoords[0], guessCoords[1], 
+                  Number(locationData[1]), 
+                  Number(locationData[0]))
+                }
+              />
             )}
           </div>
 
@@ -154,7 +167,7 @@ const App = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"
               />
-              <MapClickHandler />
+              <MapClickHandler hasGuessed={hasGuessed} />
               {guessCoords && <Marker position={guessCoords} />}
             </MapContainer>
             {guessCoords && (
@@ -166,7 +179,7 @@ const App = () => {
               fontSize: 22,
               zIndex: 400,
               }}>
-              <Guess onGuess={() => {}} guessed={true}/>
+              <Guess onGuess={() => setHasGuessed(true)} hasGuessed={hasGuessed}/>
             </div>
             )}
           </div>
