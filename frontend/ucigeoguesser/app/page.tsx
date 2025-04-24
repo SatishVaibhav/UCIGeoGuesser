@@ -10,6 +10,7 @@ import calculateScore from './score';
 import TitleScreen from './TitleScreen';
 import Results from './results';
 import Guess from './guess';
+import usePlaylistPlayer from './music';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -35,6 +36,14 @@ const App = () => {
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [hasGuessed, setHasGuessed] = useState<boolean>(false);
   
+  /*Music*/
+  const { startMusic } = usePlaylistPlayer();
+
+  const handleStart = () => {
+    setShowTitleScreen(false);
+    startMusic();
+  };
+
   /*Map settings*/
   const mapZoom = 14.5;
   const southWest = L.latLng(33.637349505993626, -117.86376123182546);
@@ -122,7 +131,7 @@ const App = () => {
   };
 
   if (showTitleScreen) {
-    return <TitleScreen onStart={() => setShowTitleScreen(false)} />;
+    return <TitleScreen onStart={() => {handleStart();}} />;
   }
 
   return (
