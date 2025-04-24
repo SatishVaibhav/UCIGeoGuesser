@@ -8,7 +8,8 @@ import L from 'leaflet';
 
 import calculateScore from './score';
 import TitleScreen from './TitleScreen';
-import Results from './Results';
+import Results from './results';
+import Guess from './guess';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -30,7 +31,7 @@ const App = () => {
   const [imageSrc, setImageSrc] = useState<string>('');
   const [locationData, setLocationData] = useState<string[]>([]);
   const [guessCoords, setGuessCoords] = useState<[number, number] | null>(null);
-  const [showTitleScreen, setShowTitleScreen] = useState<boolean>(true); // NEW
+  const [showTitleScreen, setShowTitleScreen] = useState<boolean>(true);
   const [isHovering, setIsHovering] = useState<boolean>(false);
   
   /*Map settings*/
@@ -139,13 +140,16 @@ const App = () => {
             )}
           </div>
 
-            {/* Center at aldrich park */}
-            
             <div className="absolute bottom-2 right-2 transition-all duration-300 ease-in-out" style={{ height: isHovering ? '500px' : '325px', width: isHovering ? '500px' : '325px' }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <MapContainer className="h-full w-full" center={[33.645934402549955, -117.84272074704859]} zoom={mapZoom} minZoom={mapZoom} maxBounds={mapBounds}>
+            <MapContainer className="h-full w-full" 
+              center={[33.645934402549955, -117.84272074704859]} 
+              zoom={mapZoom} 
+              minZoom={mapZoom} 
+              maxBounds={mapBounds}
+              >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution="&copy; OpenStreetMap contributors"
@@ -153,6 +157,18 @@ const App = () => {
               <MapClickHandler />
               {guessCoords && <Marker position={guessCoords} />}
             </MapContainer>
+            {guessCoords && (
+            <div style={{
+              position: 'absolute', 
+              bottom: '10%', 
+              left: '47%', 
+              transform: 'translateX(-25%)', 
+              fontSize: 22,
+              zIndex: 400,
+              }}>
+              <Guess onGuess={() => {}} guessed={true}/>
+            </div>
+            )}
           </div>
         </div>
       )}
