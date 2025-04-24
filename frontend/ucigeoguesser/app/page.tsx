@@ -112,6 +112,15 @@ const App = () => {
     return null;
   };
 
+  const UpdateMap = () => {
+    const map = useMapEvents({
+      moveend: () => {
+        map.invalidateSize(true);
+      }
+    })
+    return null;
+  };
+
   if (showTitleScreen) {
     return <TitleScreen onStart={() => setShowTitleScreen(false)} />;
   }
@@ -167,6 +176,7 @@ const App = () => {
                 attribution="&copy; OpenStreetMap contributors"
               />
               <MapClickHandler hasGuessed={hasGuessed} />
+              <UpdateMap />
               {guessCoords && <Marker position={guessCoords} />}
             </MapContainer>
             {guessCoords && (
