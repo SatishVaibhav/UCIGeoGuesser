@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const tracks = [
-  "/Users/vaibhav_satish/Desktop/github/UCIGeoGuesser/music_effects/mc.mp3",
-  "/Users/vaibhav_satish/Desktop/github/UCIGeoGuesser/music_effects/dora.mp3",
+  "/music_effects/"
 ];
 
 const usePlaylistPlayer = () => {
