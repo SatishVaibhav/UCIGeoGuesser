@@ -4,13 +4,12 @@ import React, { useState, useEffect } from 'react';
 import { openDB } from 'idb';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import L, { icon } from 'leaflet';
 
 import calculateScore from './score';
 import TitleScreen from './TitleScreen';
 import Results from './results';
 import Guess from './guess';
-import { hasSubscribers } from 'diagnostics_channel';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -38,8 +37,8 @@ const App = () => {
   
   /*Map settings*/
   const mapZoom = 14.5;
-  const southWest = L.latLng(33.63996645704226, -117.8553771977022);
-  const northEast = L.latLng(33.65229191655349, -117.82417774244097);
+  const southWest = L.latLng(33.637349505993626, -117.86376123182546);
+  const northEast = L.latLng(33.657544515897925, -117.82132053505912);
   const mapBounds = L.latLngBounds(southWest, northEast);
 
   useEffect(() => {
