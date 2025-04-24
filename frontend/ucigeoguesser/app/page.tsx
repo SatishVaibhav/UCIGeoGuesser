@@ -22,6 +22,16 @@ const defaultIcon = L.icon({
   shadowSize: [41, 41],
 });
 
+const answerIcon = L.icon({
+  iconUrl: 'https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/brown_webpict50_1484337223-1.png',
+  iconRetinaUrl: 'https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/brown_webpict50_1484337223-1.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconSize: [41, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [30, 30],
+});
+
 L.Marker.prototype.options.icon = defaultIcon;
 
 const App = () => {
@@ -112,15 +122,6 @@ const App = () => {
     return null;
   };
 
-  const UpdateMap = () => {
-    const map = useMapEvents({
-      moveend: () => {
-        map.invalidateSize(true);
-      }
-    })
-    return null;
-  };
-
   if (showTitleScreen) {
     return <TitleScreen onStart={() => setShowTitleScreen(false)} />;
   }
@@ -176,8 +177,10 @@ const App = () => {
                 attribution="&copy; OpenStreetMap contributors"
               />
               <MapClickHandler hasGuessed={hasGuessed} />
-              <UpdateMap />
               {guessCoords && <Marker position={guessCoords} />}
+              {hasGuessed && locationData && (
+                <Marker position={[Number(locationData[1]), Number(locationData[0])]} icon={answerIcon} />
+              )}
             </MapContainer>
             {guessCoords && (
             <div style={{
