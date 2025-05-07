@@ -18,10 +18,6 @@ function calculateScore(userLatitude: number, userLongitude: number, correctLati
         score = 5000;
     }
 
-    if (score < 0) {
-        score = 0;
-    }
-
     return score;
 }
 

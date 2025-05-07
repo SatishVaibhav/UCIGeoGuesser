@@ -94,6 +94,24 @@ const App = () => {
     loadData();
   }, []);
 
+  useEffect(() => {
+    //Finalize guess by pressing space bar
+    const KeyPressHandler = (event: KeyboardEvent) => {
+      if (event.code === 'Space' && guessCoords && !hasGuessed) {
+        setHasGuessed(true);
+      }
+
+    //Show next image by pressing enter (can be changed or removed if deemed obsolete)
+      else if (event.code === 'Enter' && guessCoords && hasGuessed) {
+        loadNewImage();
+        setHasGuessed(false);
+      }
+    };
+
+    window.addEventListener('keydown', KeyPressHandler);
+    return () => window.removeEventListener('keydown', KeyPressHandler);
+  }, [guessCoords, hasGuessed]);
+
   const loadNewImage = async () => {
     setLoading(true);
     setGuessCoords(null);
@@ -165,7 +183,7 @@ const App = () => {
             <div className="absolute bottom-2 right-2 transition-all duration-300 ease-in-out" style={{ height: isHovering ? '500px' : '325px', width: isHovering ? '500px' : '325px' }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-          >
+            >
             <MapContainer className="h-full w-full" 
               center={[33.645934402549955, -117.84272074704859]} 
               zoom={mapZoom} 
