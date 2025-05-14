@@ -10,6 +10,7 @@ import calculateScore from './score';
 import TitleScreen from './TitleScreen';
 import Results from './results';
 import Guess from './guess';
+import GameTimer from './GameTimer';
 
 // Set a default icon for markers
 const defaultIcon = L.icon({
@@ -164,9 +165,9 @@ const App = () => {
         <div className="min-h-screen flex flex-col items-center justify-center">
           <div className="absolute top-2 left-2 bg-gray-500/30 bg-opacity-90 px-1 py-0 rounded-2xl shadow-xl text-center w-full max-w-xs">
             <h1 className="mb-2 text-white font-extrabold text-4xl drop-shadow-[px_1px_0px_black]">UCI GeoGuesser</h1>
-            <h2 className="mb-2 text-slate font-semibold text-3xl">
-
-            </h2>
+            <div className="text-white">
+            <GameTimer timeLimitInSeconds={30} onEnd={() => {setHasGuessed(true);}}></GameTimer>
+            </div>
             {hasGuessed && guessCoords &&(
               <Results onNextImage={() => {
                 loadNewImage();
@@ -179,6 +180,7 @@ const App = () => {
               />
             )}
           </div>
+              
 
             <div className="absolute bottom-2 right-2 transition-all duration-300 ease-in-out" style={{ height: isHovering ? '500px' : '325px', width: isHovering ? '500px' : '325px' }}
             onMouseEnter={() => setIsHovering(true)}
