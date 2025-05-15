@@ -19,7 +19,7 @@ const usePlaylistPlayer = () => {
   useEffect(() => {
     // Create a new audio element and set it up
     const audio = new Audio(tracks[trackIndex]);
-    audio.volume = 1;
+    audio.volume = 1    ;
     audioRef.current = audio;
 
     audio.onended = () => {
