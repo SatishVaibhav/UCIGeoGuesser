@@ -52,6 +52,9 @@ const App = () => {
   const northEast = L.latLng(33.657544515897925, -117.82132053505912);
   const mapBounds = L.latLngBounds(southWest, northEast);
 
+  /*Timer*/
+  const timeLimit = 30; //seconds
+
   useEffect(() => {
     if (typeof window === 'undefined' || !('indexedDB' in window)) return;
 
@@ -166,7 +169,7 @@ const App = () => {
           <div className="absolute top-2 left-2 bg-gray-500/30 bg-opacity-90 px-1 py-0 rounded-2xl shadow-xl text-center w-full max-w-xs">
             <h1 className="mb-2 text-white font-extrabold text-4xl drop-shadow-[px_1px_0px_black]">UCI GeoGuesser</h1>
             <div className="text-white">
-            <GameTimer timeLimitInSeconds={30} onEnd={() => {setHasGuessed(true);}}></GameTimer>
+            {(!guessCoords)? <GameTimer timeLimitInSeconds={timeLimit} onEnd={() => {setHasGuessed(true); setGuessCoords([0, 0])}}></GameTimer> : <GameTimer timeLimitInSeconds={10} onEnd={() => {setHasGuessed(true);}}></GameTimer>}
             </div>
             {hasGuessed && guessCoords &&(
               <Results onNextImage={() => {
