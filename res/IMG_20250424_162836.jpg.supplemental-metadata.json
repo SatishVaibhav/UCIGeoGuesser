@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250424_162836.jpg",
+  "description": "",
+  "imageViews": "3",
+  "creationTime": {
+    "timestamp": "1745591991",
+    "formatted": "Apr 25, 2025, 2:39:51 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1745537318",
+    "formatted": "Apr 24, 2025, 11:28:38 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.648001,
+    "longitude": -117.841608,
+    "altitude": -7.265,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.648001,
+    "longitude": -117.841608,
+    "altitude": -7.265,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipMaFZDwxkZ0r6Au8H67oFFGOweiILlaPVSebFU",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

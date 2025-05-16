@@ -1,0 +1,29 @@
+{
+  "title": "IMG_20250507_195616.jpg",
+  "description": "",
+  "imageViews": "0",
+  "creationTime": {
+    "timestamp": "1746802051",
+    "formatted": "May 9, 2025, 2:47:31 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1746672982",
+    "formatted": "May 8, 2025, 2:56:22 AM UTC"
+  },
+  "geoData": {
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "altitude": 0.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipNWeS3g4l2gVmJHr5oXV4WS-WbKEK2wNcmmlik",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

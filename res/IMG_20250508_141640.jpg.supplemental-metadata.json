@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250508_141640.jpg",
+  "description": "",
+  "imageViews": "0",
+  "creationTime": {
+    "timestamp": "1746802051",
+    "formatted": "May 9, 2025, 2:47:31 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1746739004",
+    "formatted": "May 8, 2025, 9:16:44 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.643904,
+    "longitude": -117.84497700000001,
+    "altitude": 12.873,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.643904,
+    "longitude": -117.84497700000001,
+    "altitude": 12.873,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipMARKxZLv1u8zgm0hgn7aH3cQlMbml_1gdndsY",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "title": "IMG_20250514_105321.jpg",
+  "description": "",
+  "imageViews": "0",
+  "creationTime": {
+    "timestamp": "1747245257",
+    "formatted": "May 14, 2025, 5:54:17 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1747245209",
+    "formatted": "May 14, 2025, 5:53:29 PM UTC"
+  },
+  "geoData": {
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "altitude": 0.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipP3TCMdKV9pOqvIyn-yz5XFF1MetafT7ee5DUs",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

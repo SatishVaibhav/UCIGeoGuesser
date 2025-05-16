@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250427_155019.jpg",
+  "description": "",
+  "imageViews": "3",
+  "creationTime": {
+    "timestamp": "1745967761",
+    "formatted": "Apr 29, 2025, 11:02:41 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1745794223",
+    "formatted": "Apr 27, 2025, 10:50:23 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.646674,
+    "longitude": -117.845423,
+    "altitude": 1.526,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.646674,
+    "longitude": -117.845423,
+    "altitude": 1.526,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipMnP9_tGURWgE6jHPYo9qNg4SqtCHrreXx789c",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}

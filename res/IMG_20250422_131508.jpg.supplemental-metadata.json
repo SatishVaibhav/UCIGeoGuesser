@@ -1,0 +1,36 @@
+{
+  "title": "IMG_20250422_131508.jpg",
+  "description": "",
+  "imageViews": "3",
+  "creationTime": {
+    "timestamp": "1745434405",
+    "formatted": "Apr 23, 2025, 6:53:25 PM UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1745352911",
+    "formatted": "Apr 22, 2025, 8:15:11 PM UTC"
+  },
+  "geoData": {
+    "latitude": 33.649499,
+    "longitude": -117.843031,
+    "altitude": 10.827,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 33.649499,
+    "longitude": -117.843031,
+    "altitude": 10.827,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/AF1QipN_cC9F2TDsoZO-tMw_f3Q1spgpw4vWjYdAEww",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}
