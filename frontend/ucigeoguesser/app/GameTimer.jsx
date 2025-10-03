@@ -1,75 +1,86 @@
 import { useEffect, useRef, useState } from "react";
 
-// timeLimitInSeconds is a integer in seconds
-// onEnd (function) does not need to be passed in as args
-function GameTimer({timeLimitInSeconds, onEnd}) {
+// timeLimitInSeconds is an integer in seconds
+// onEnd (function) will be called when time reaches zero (but NOT during render)
+function GameTimer({ timeLimitInSeconds, onEnd }) {
+  // record the start time for accurate measurements
+  const startRef = useRef(Date.now());
 
-    /* Time Settings */
-    // UseRef are used to prevent re-rendering in the useEffect (setInterval specifically) function I learn this the hard way...
-    const initialTime = useRef(Date.now());
-    const currentTime = useRef(initialTime);
+  // timeLeft is an integer number of seconds remaining
+  const [timeLeft, setTimeLeft] = useState(() => timeLimitInSeconds);
 
-    const [timeLeft, setTimeLeft] = useState(timeLimitInSeconds);
-    const timeIntervalRef = useRef();
+  const intervalRef = useRef(null);
 
+  // (re)start timer whenever timeLimitInSeconds changes
+  useEffect(() => {
+    // reset start time and visible time
+    startRef.current = Date.now();
+    setTimeLeft(timeLimitInSeconds);
 
-    // Updates the timer every second and clears when negative
-    useEffect(() => {
-        if (!timeOver(initialTime.current, currentTime.current, timeLimitInSeconds)) {
-            timeIntervalRef.current = setInterval(() => {
-                currentTime.current = Date.now();
-                const timeRemaining = Math.ceil(timeLeftInSeconds(initialTime.current, currentTime.current, timeLimitInSeconds));
-                setTimeLeft(timeRemaining);
-                // Stops the timer from going below zero
-                if (timeRemaining <= 0) {
-                    clearInterval(timeIntervalRef.current);
-                }
-            }, 1000); // Updates every 1 second (1000ms)  
+    // clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
 
-           
+    // use a somewhat frequent tick so we don't skip 0 (250ms)
+    intervalRef.current = setInterval(() => {
+      const elapsed = (Date.now() - startRef.current) / 1000;
+      const remaining = Math.ceil(timeLimitInSeconds - elapsed);
+
+      // update state using calculated remaining
+      setTimeLeft(prev => {
+        // if remaining <= 0, ensure we return 0 and clear interval
+        if (remaining <= 0) {
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
+          return 0;
         }
-        
+        return remaining;
+      });
+    }, 250);
 
-        return (() => {
-            clearInterval(timeIntervalRef.current);
-        });
+    // cleanup on unmount or when timeLimit changes
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [timeLimitInSeconds]);
 
-       
-        
-    }, [timeLimitInSeconds])
-
+  // Call onEnd from an effect when timeLeft becomes 0.
+  // This guarantees the call happens after render (safe).
+  useEffect(() => {
     if (timeLeft <= 0) {
-        onEnd?.(); // If onEnd isnt passed in this syntax allows it to be no-op (doesnt do anything)
-        return null;
+      // defer the call to avoid any render-time state updates issues in parent
+      Promise.resolve().then(() => {
+        onEnd?.();
+      });
     }
-    else {
-        return (
-            <h1>{formatTime(timeLeft)}</h1>
-        );
-    }
-    
-   
+  }, [timeLeft, onEnd]);
+
+  if (timeLeft <= 0) {
+    return null;
+  }
+
+  return <h1>{formatTime(timeLeft)}</h1>;
 }
 
-// Checks if time is over and returns true/false
-function timeOver(startTime, currentTime, timeLimitInSeconds) {
-    return (timeLeftInSeconds(startTime, currentTime, timeLimitInSeconds)) <= 0 ? true : false;
-}
-
-// Current time in seconds and returns a double (number in js)
+// Helpers (unchanged except ensure they're pure)
 function timeLeftInSeconds(startTime, currentTime, timeLimitInSeconds) {
-    return (timeLimitInSeconds  - (currentTime - startTime)/1000);
+  return timeLimitInSeconds - (currentTime - startTime) / 1000;
 }
 
-// Format time in Minute, Seconds format
 function formatTime(time) {
-    const minutes = Math.floor(time/60);
-    const seconds = Math.floor(time % 60);
-    if (seconds < 10) {
-        return minutes + ':0' + seconds;
-    }
-    return minutes + ':' + seconds;
-
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  if (seconds < 10) {
+    return minutes + ":0" + seconds;
+  }
+  return minutes + ":" + seconds;
 }
 
 export default GameTimer;

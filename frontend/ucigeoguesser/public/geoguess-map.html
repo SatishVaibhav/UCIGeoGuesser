@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>GeoGuesser Map (iframe)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    html,body,#map { height: 100%; margin: 0; padding: 0; }
+    #map { width: 100vw; height: 100vh; }
+    .leaflet-container { background: #eaeaea; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      // Map initial settings (same bounds/center as your app)
+      const center = [33.645934402549955, -117.84272074704859];
+      const mapZoom = 14.5;
+      const southWest = [33.637349505993626, -117.86376123182546];
+      const northEast = [33.657544515897925, -117.82132053505912];
+
+      const map = L.map('map', {
+        center,
+        zoom: mapZoom,
+        minZoom: mapZoom,
+        maxBounds: L.latLngBounds(southWest, northEast),
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // marker variables
+      let guessMarker = null;
+      let answerMarker = null;
+      let locked = false;
+
+      // helper: create marker icon sizes like your react version if needed
+      const defaultIcon = L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [25,41],
+        iconAnchor: [12,41],
+        shadowSize: [41,41]
+      });
+
+      const answerIcon = L.icon({
+        iconUrl: 'https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/brown_webpict50_1484337223-1.png',
+        iconRetinaUrl: 'https://www.rawshorts.com/freeicons/wp-content/uploads/2017/01/brown_webpict50_1484337223-1.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+        iconSize: [41,41],
+        iconAnchor: [12,41],
+      });
+
+      // click handler: place guess if not locked
+      map.on('click', function (e) {
+        if (locked) return;
+        const { lat, lng } = e.latlng;
+        if (!guessMarker) {
+          guessMarker = L.marker([lat, lng], { icon: defaultIcon }).addTo(map);
+        } else {
+          guessMarker.setLatLng([lat, lng]);
+        }
+        // post message to parent
+        window.parent.postMessage({ type: 'guess', lat, lng }, '*');
+      });
+
+      // message receiver from parent
+      window.addEventListener('message', (ev) => {
+        const msg = ev.data || {};
+        if (!msg || !msg.type) return;
+
+        switch (msg.type) {
+          case 'lock':
+            locked = true;
+            // optionally show answer if parent sent answer coords
+            if (msg.showAnswer && typeof msg.lat === 'number' && typeof msg.lng === 'number') {
+              if (!answerMarker) {
+                answerMarker = L.marker([msg.lat, msg.lng], { icon: answerIcon }).addTo(map);
+              } else {
+                answerMarker.setLatLng([msg.lat, msg.lng]);
+              }
+            }
+            break;
+
+          case 'showAnswer':
+            // show answer marker but don't lock clicks unless parent sends lock
+            if (typeof msg.lat === 'number' && typeof msg.lng === 'number') {
+              if (!answerMarker) {
+                answerMarker = L.marker([msg.lat, msg.lng], { icon: answerIcon }).addTo(map);
+              } else {
+                answerMarker.setLatLng([msg.lat, msg.lng]);
+              }
+            }
+            break;
+
+          case 'clear':
+            locked = false;
+            if (guessMarker) {
+              map.removeLayer(guessMarker);
+              guessMarker = null;
+            }
+            if (answerMarker) {
+              map.removeLayer(answerMarker);
+              answerMarker = null;
+            }
+            if (msg.center) {
+              // optional: recenter map if parent requests
+              map.setView(msg.center, msg.zoom || mapZoom);
+            }
+            break;
+
+          case 'setGuess':
+            if (typeof msg.lat === 'number' && typeof msg.lng === 'number') {
+              if (!guessMarker) guessMarker = L.marker([msg.lat, msg.lng], { icon: defaultIcon }).addTo(map);
+              else guessMarker.setLatLng([msg.lat, msg.lng]);
+            }
+            break;
+
+          case 'lockAndShowAnswer':
+            locked = true;
+            if (typeof msg.lat === 'number' && typeof msg.lng === 'number') {
+              if (!answerMarker) {
+                answerMarker = L.marker([msg.lat, msg.lng], { icon: answerIcon }).addTo(map);
+              } else {
+                answerMarker.setLatLng([msg.lat, msg.lng]);
+              }
+            }
+            break;
+
+          default:
+            break;
+        }
+      }, false);
+
+      // friendly ready signal
+      window.parent.postMessage({ type: 'mapReady' }, '*');
+
+    })();
+  </script>
+</body>
+</html>
