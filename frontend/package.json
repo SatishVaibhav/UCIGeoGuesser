@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4.1.4"
   }
 }
