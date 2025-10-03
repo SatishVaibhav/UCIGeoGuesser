@@ -1,14 +1,18 @@
 {
   "name": "ucigeoguesser",
+  "homepage": "https://satishvaibhav.github.io/UCIGeoGuesser/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "idb": "^8.0.2",
     "leaflet": "^1.9.4",
     "next": "15.3.1",
