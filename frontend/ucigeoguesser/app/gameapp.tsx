@@ -36,8 +36,8 @@ export default function GameApp() {
   const southWest = [33.637349505993626, -117.86376123182546];
   const northEast = [33.657544515897925, -117.82132053505912];
 
-  const timeLimit = 15; //seconds
-  const maxRounds = 5;
+  const timeLimit = 20; //seconds
+  const maxRounds = 8;
   const [currRound, setCurrRound] = useState<number>(0);
   const [finalScore, setFinalScore] = useState<number>(0);
   const [gameOver, setGameOver] = useState<boolean>(false);
