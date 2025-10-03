@@ -37,6 +37,10 @@ int main() {
             sst << into.rdbuf();
 
             res["images"][to_string(id)]["metadata"] = crow::json::load(sst.str());
+
+            if (id == 10) {
+                break;
+            }
         }
         return res;
     }); 
