@@ -66,7 +66,7 @@ export default function GameApp() {
 
     if (!allImages) {
       try {
-        const res = await fetch('https://ucigeoguesser.onrender.com/');
+        const res = await fetch('https://ucigeoguesser.onrender.com/home');
         const data = await res.json();
         allImages = data.images;
         await db.put('homeData', allImages, 'allImages');
